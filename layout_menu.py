@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QPushButton, QRadioButton, QLabel, QSpinBox, QGroupBox, QButtonGroup, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import QPushButton, QVBoxLayout
 from PyQt5.QtCore import Qt
 
 btn_start = QPushButton("Почати тестування")
