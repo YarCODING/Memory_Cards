@@ -6,6 +6,9 @@ btn_rest = QPushButton("Відпочити")
 spin = QSpinBox()
 spin.setValue(30)
 
+
+
+#питання
 btn_answer = QPushButton("Відповісти")
 lb_question = QLabel("Питання")
 
@@ -50,3 +53,23 @@ main_line_test.addLayout(line1_test)
 main_line_test.addLayout(line2_test)
 main_line_test.addLayout(line3_test)                         
 main_line_test.addLayout(line4_test)
+
+
+
+#відповідь
+lb_user_answer_text = QLabel('Ваша відповідь')
+lb_user_answer = QLabel('Відповідь користувача')
+
+btn_next = QPushButton("Наступне питання")
+
+groupbox_answer = QGroupBox("Правильна відповідь")
+lb_answer = QLabel("Правильна відповідь")
+
+main_line_answer = QVBoxLayout()
+main_line_answer.addWidget(lb_user_answer_text)
+main_line_answer.addWidget(lb_user_answer)
+line_answer = QVBoxLayout(groupbox_answer)
+line_answer.addWidget(lb_answer)
+main_line_answer.addWidget(groupbox_answer)
+main_line_answer.addWidget(btn_next)
+main_line_answer.addLayout(line_answer)
