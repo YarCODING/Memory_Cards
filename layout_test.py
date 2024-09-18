@@ -7,7 +7,6 @@ spin = QSpinBox()
 spin.setValue(30)
 
 
-
 #питання
 btn_answer = QPushButton("Відповісти")
 lb_question = QLabel("Питання")
@@ -56,7 +55,7 @@ main_line_test.addLayout(line4_test)
 
 
 
-#відповідь
+#відповіді
 lb_user_answer_text = QLabel('Ваша відповідь')
 lb_user_answer = QLabel('Відповідь користувача')
 

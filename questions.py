@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QLabel, QRadioButton
+
 class Question:
     def __init__(self, question_text:str, answer_right:str, answer_wrong1:str, answer_wrong2:str, answer_wrong3:str,):
         self.question_text = question_text
@@ -17,6 +18,7 @@ class Question:
 
 questions = []
 
+# створення питань
 Question('В якому році почалася 2 Світова Війна?', '1939', '1940', '1950', '1914')
 Question('Скільки важить кілограм афальту, якщо папуга летить на північ?', '1 кг', '1 т', '2 кг', '10 кг')
 Question('В якому році з\'явився мем Жабеня Пєпє?', '2005', '2010', '1999', '2020')
