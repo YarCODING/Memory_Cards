@@ -1,9 +1,12 @@
 from PyQt5.QtWidgets import QWidget, QApplication
+import sys
+from random import shuffle
 
 app = QApplication([])
 
 from layout_test import*
 from layout_menu import*
+from questions import*
 
 window = QWidget()
 window_answer = QWidget()
@@ -25,19 +28,33 @@ window.show()
 window_answer.hide()
 window_menu.hide()
 
+shuffle(questions)
+question_number = 0
+questions[question_number].show(lb_question, rb1, rb2, rb3, rb4)
+
 def Answer():
     window.hide()
     window_answer.show()
-def Next():
-    window.show()
-    window_answer.hide()
 def Menu():
     window.hide()
     window_answer.hide()
     window_menu.show()
+def Next():
+    global question_number
+    window.show()
+    window.resize(600, 500)
+    window_answer.hide()
+    question_number += 1
+    try:
+        questions[question_number].show(lb_question, rb1, rb2, rb3, rb4)
+    except IndexError:
+        lb_finish_text.show()
+        Menu()
+
 
 btn_answer.clicked.connect(Answer)
 btn_next.clicked.connect(Next)
 btn_menu.clicked.connect(Menu)
+btn_exit.clicked.connect(lambda:sys.exit())
 
 app.exec_()
