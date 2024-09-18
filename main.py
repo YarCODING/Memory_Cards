@@ -37,6 +37,14 @@ question_number = 0
 questions[question_number].show(lb_question, rb1, rb2, rb3, rb4)
 
 # функції для кнопок
+def setNoChecked():
+    group.setExclusive(False)
+    rb1.setChecked(False)
+    rb2.setChecked(False)
+    rb3.setChecked(False)
+    rb4.setChecked(False)
+    group.setExclusive(True)
+
 def Answer():
     window.hide()
     window_answer.show()
@@ -51,8 +59,8 @@ def Next():
     window.show()
     window.resize(600, 500)
     window_answer.hide()
+    setNoChecked()  
     question_number += 1
-
     try:
         questions[question_number].show(lb_question, rb1, rb2, rb3, rb4)
     except IndexError:
