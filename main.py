@@ -34,7 +34,7 @@ window_menu.hide()
 # перемішування питань
 shuffle(questions)
 question_number = 0
-questions[question_number].show(lb_question, rb1, rb2, rb3, rb4)
+questions[question_number].show(lb_question, rb1, rb2, rb3, rb4, question_number)
 
 # функції для кнопок
 def setNoChecked():
@@ -46,6 +46,7 @@ def setNoChecked():
     group.setExclusive(True)
 
 def Answer():
+    questions[question_number].check(rb1, rb2, rb3, rb4, lb_user_answer, lb_answer, lb_result)
     window.hide()
     window_answer.show()
 
@@ -62,10 +63,24 @@ def Next():
     setNoChecked()  
     question_number += 1
     try:
-        questions[question_number].show(lb_question, rb1, rb2, rb3, rb4)
+        questions[question_number].show(lb_question, rb1, rb2, rb3, rb4, question_number)
+    # дії при закінченні питань
     except IndexError:
+        global correct, wrong
         lb_finish_text.show()
+        lb_right_number.setText(f'<h3 style="color: rgb(50,205,50);">Правильних: {correct}</h3>')
+        lb_wrong_number.setText(f'<h3 style="color: rgb(250, 55, 55);">Неправильних: {wrong}</h3>')
+        lb_right_number.show()
+        lb_wrong_number.show()
         Menu()
+
+        question_number = 0
+        correct = 0
+        wrong = 0
+
+def Start_Return():
+    window_menu.hide()
+    window.show()
 
 
 # підключення функцій до кнопок
@@ -73,6 +88,7 @@ btn_answer.clicked.connect(Answer)
 btn_next.clicked.connect(Next)
 btn_menu.clicked.connect(Menu)
 btn_exit.clicked.connect(lambda:sys.exit())
+btn_start.clicked.connect(Start_Return)
 
 # запуск додатку
 app.exec_()

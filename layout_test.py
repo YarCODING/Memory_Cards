@@ -57,18 +57,21 @@ main_line_test.addLayout(line4_test)
 
 #відповіді
 lb_user_answer_text = QLabel('Ваша відповідь')
-lb_user_answer = QLabel('Відповідь користувача')
+lb_user_answer = QLabel('Відповіді не має')
 
 btn_next = QPushButton("Наступне питання")
 
 groupbox_answer = QGroupBox("Правильна відповідь")
 lb_answer = QLabel("Правильна відповідь")
+lb_result = QLabel('___')
 
 main_line_answer = QVBoxLayout()
+main_line_answer.addLayout(line1_test)
 main_line_answer.addWidget(lb_user_answer_text)
 main_line_answer.addWidget(lb_user_answer)
 line_answer = QVBoxLayout(groupbox_answer)
 line_answer.addWidget(lb_answer)
 main_line_answer.addWidget(groupbox_answer)
+main_line_answer.addWidget(lb_result)
 main_line_answer.addWidget(btn_next)
 main_line_answer.addLayout(line_answer)

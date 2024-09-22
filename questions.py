@@ -1,7 +1,11 @@
 from PyQt5.QtWidgets import QLabel, QRadioButton
 
+# Лічильник правильних і неправильних відповідей
+correct = 0
+wrong = 0
+
 class Question:
-    def __init__(self, question_text:str, answer_right:str, answer_wrong1:str, answer_wrong2:str, answer_wrong3:str,):
+    def __init__(self, question_text:str, answer_right:str, answer_wrong1:str, answer_wrong2:str, answer_wrong3:str):
         self.question_text = question_text
         self.rightAnswer = answer_right
         self.wrongAnswer1 = answer_wrong1
@@ -9,16 +13,39 @@ class Question:
         self.wrongAnswer3 = answer_wrong3
         questions.append(self)
 
-    def show(self, lb_question: QLabel, rb1: QRadioButton, rb2: QRadioButton, rb3: QRadioButton, rb4: QRadioButton):
-        lb_question.setText(self.question_text)
+    def show(self, lb_question: QLabel, rb1: QRadioButton, rb2: QRadioButton, rb3: QRadioButton, rb4: QRadioButton, index: int):
+        lb_question.setText(f"{index+1}. {self.question_text}")
         rb1.setText(self.rightAnswer)
         rb2.setText(self.wrongAnswer1)
         rb3.setText(self.wrongAnswer2)
         rb4.setText(self.wrongAnswer3)
 
-questions = []
+    def check(self, rb1: QRadioButton, rb2: QRadioButton, rb3: QRadioButton, rb4: QRadioButton, lb_user_answer: QLabel, lb_answer:QLabel, lb_result: QLabel):
+        global correct, wrong
+        if rb1.isChecked():
+            lb_user_answer.setText(self.rightAnswer)
+            correct += 1
+        elif rb2.isChecked():
+            lb_user_answer.setText(self.wrongAnswer1)
+            wrong += 1
+        elif rb3.isChecked():
+            lb_user_answer.setText(self.wrongAnswer1)
+            wrong += 1
+        elif rb4.isChecked():
+            lb_user_answer.setText(self.wrongAnswer1)
+            wrong += 1
+        else:
+            wrong += 1
 
+        lb_answer.setText(self.rightAnswer)
+
+        if lb_user_answer.text() == self.rightAnswer:
+            lb_result.setText('<h1 style="color: rgb(50,205,50);">Правильно</h1>')
+        else:
+            lb_result.setText('<h1 style="color: rgb(250, 55, 55);">Неправильно</h1>')
+           
 # створення питань
+questions = []
 Question('В якому році почалася 2 Світова Війна?', '1939', '1940', '1950', '1914')
 Question('Скільки важить кілограм афальту, якщо папуга летить на північ?', '1 кг', '1 т', '2 кг', '10 кг')
 Question('В якому році з\'явився мем Жабеня Пєпє?', '2005', '2010', '1999', '2020')
@@ -35,8 +62,4 @@ Question('Що таке суперпозиція у квантовій фізи�
 Question('Що робить персонаж у мемі "This is fine"?', 'Сидить у палаючій кімнаті і каже, що все добре', 'Танцює на вулиці під дощем', 'П\'є каву на фоні вибуху', 'Втікає від падаючого метеориту')
 Question('Чого не може торнадо?', 'Стояти на місці', 'Підняти у повітря автомобіль', 'Вирвати з корінням дерево', 'Зруйнувати будівлю')
 Question('Як називається приміщення на судні, де мешкають матроси?', 'Кубрик', 'Келія', 'Квартира', 'Кабінет')
-# Question('', '', '', '', '')
-# Question('', '', '', '', '')
-# Question('', '', '', '', '')
-# Question('', '', '', '', '')
 # Question('', '', '', '', '')
