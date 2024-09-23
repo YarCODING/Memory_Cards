@@ -43,7 +43,14 @@ class Question:
             lb_result.setText('<h1 style="color: rgb(50,205,50);">Правильно</h1>')
         else:
             lb_result.setText('<h1 style="color: rgb(250, 55, 55);">Неправильно</h1>')
-
+    
+    def showEndResult(self, lb_right_number: QLabel, lb_wrong_number:QLabel, lb_finish_text:QLabel):
+        global correct, wrong
+        lb_finish_text.show()
+        lb_right_number.setText(f'<h2 style="color: rgb(50,205,50);">Правильних: {correct}</h2>')
+        lb_wrong_number.setText(f'<h2 style="color: rgb(250, 55, 55);">Неправильних: {wrong}</h2>')
+        lb_right_number.show()
+        lb_wrong_number.show()
 
 # створення питань
 questions = []

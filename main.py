@@ -61,19 +61,6 @@ def Menu():
     window_answer.hide()
     window_menu.show()
 
-def showResult():
-    global question_number, correct, wrong
-    lb_finish_text.show()
-    lb_right_number.setText(f'<h3 style="color: rgb(50,205,50);">Правильних: {correct}</h3>')
-    lb_wrong_number.setText(f'<h3 style="color: rgb(250, 55, 55);">Неправильних: {wrong}</h3>')
-    lb_right_number.show()
-    lb_wrong_number.show()
-    Menu()
-
-    question_number = 0
-    correct = 0
-    wrong = 0
-
 def Next():
     global question_number, correct, wrong
     window.show()
@@ -85,7 +72,12 @@ def Next():
         questions[question_number].show(lb_question, rb1, rb2, rb3, rb4, question_number)
     # дії при закінченні питань
     except IndexError:
-        showResult()
+        questions[question_number-1].showEndResult(lb_right_number, lb_wrong_number, lb_finish_text)
+        Menu()
+
+        question_number = 0
+        correct = 0
+        wrong = 0
 
 def Start_Return():
     window_menu.hide()
