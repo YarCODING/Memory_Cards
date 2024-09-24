@@ -13,25 +13,25 @@ class Question:
         self.wrongAnswer3 = answer_wrong3
         questions.append(self)
 
-    def show(self, lb_question: QLabel, rb1: QRadioButton, rb2: QRadioButton, rb3: QRadioButton, rb4: QRadioButton, index: int):
+    def show(self, lb_question: QLabel, rbuttons:QLabel, index: int):
         lb_question.setText(f"{index+1}. {self.question_text}")
-        rb1.setText(self.rightAnswer)
-        rb2.setText(self.wrongAnswer1)
-        rb3.setText(self.wrongAnswer2)
-        rb4.setText(self.wrongAnswer3)
+        rbuttons[0].setText(self.rightAnswer)
+        rbuttons[1].setText(self.wrongAnswer1)
+        rbuttons[2].setText(self.wrongAnswer2)
+        rbuttons[3].setText(self.wrongAnswer3)
 
-    def check(self, rb1: QRadioButton, rb2: QRadioButton, rb3: QRadioButton, rb4: QRadioButton, lb_user_answer: QLabel, lb_answer:QLabel, lb_result: QLabel):
+    def check(self, lb_user_answer:QLabel, rbList:list, lb_answer:QLabel, lb_result:QLabel):
         global correct, wrong
-        if rb1.isChecked():
+        if rbList[0].isChecked():
             lb_user_answer.setText(self.rightAnswer)
             correct += 1
-        elif rb2.isChecked():
+        elif rbList[1].isChecked():
             lb_user_answer.setText(self.wrongAnswer1)
             wrong += 1
-        elif rb3.isChecked():
+        elif rbList[2].isChecked():
             lb_user_answer.setText(self.wrongAnswer1)
             wrong += 1
-        elif rb4.isChecked():
+        elif rbList[3].isChecked():
             lb_user_answer.setText(self.wrongAnswer1)
             wrong += 1
         else:

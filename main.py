@@ -9,6 +9,9 @@ from layout_test import*
 from layout_menu import*
 from questions import questions, correct, wrong
 
+import os
+clear = lambda: os.system('cls')
+
 # налаштування вікон
 window = QWidget()
 window_answer = QWidget()
@@ -40,9 +43,10 @@ window_menu.hide()
 # перемішування питань
 shuffle(questions)
 question_number = 0
-questions[question_number].show(lb_question, rb1, rb2, rb3, rb4, question_number)
+questions[question_number].show(lb_question, rbuttons, question_number)
 
 # функції для кнопок
+clear()
 def setNoChecked():
     group.setExclusive(False)
     rb1.setChecked(False)
@@ -52,7 +56,7 @@ def setNoChecked():
     group.setExclusive(True)
 
 def Answer():
-    questions[question_number].check(rb1, rb2, rb3, rb4, lb_user_answer, lb_answer, lb_result)    
+    questions[question_number].check(lb_user_answer, rbuttons, lb_answer, lb_result)    
     window.hide()
     window_answer.show()
 
@@ -69,7 +73,8 @@ def Next():
     setNoChecked()  
     question_number += 1
     try:
-        questions[question_number].show(lb_question, rb1, rb2, rb3, rb4, question_number)
+        shuffle(rbuttons)
+        questions[question_number].show(lb_question, rbuttons, question_number)
     # дії при закінченні питань
     except IndexError:
         questions[question_number-1].showEndResult(lb_right_number, lb_wrong_number, lb_finish_text)

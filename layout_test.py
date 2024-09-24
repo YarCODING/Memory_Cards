@@ -22,6 +22,8 @@ group.addButton(rb2, 2)
 group.addButton(rb3, 3)
 group.addButton(rb4, 4)
 
+rbuttons = [rb1, rb2, rb3, rb4]
+
 groupbox = QGroupBox("Варіанти відповідей")
 
 line = QHBoxLayout(groupbox)
