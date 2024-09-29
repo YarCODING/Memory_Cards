@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 
 btn_menu = QPushButton("Меню")
 btn_rest = QPushButton("Відпочити")
+lb_timer = QLabel('0')
 spin = QSpinBox()
 spin.setValue(30)
 
@@ -43,6 +44,7 @@ line3_test = QHBoxLayout()
 line4_test = QHBoxLayout()
 
 line1_test.addWidget(btn_menu)
+line1_test.addWidget(lb_timer)
 line1_test.addWidget(btn_rest)
 line1_test.addWidget(spin)
 

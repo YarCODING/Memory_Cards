@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QApplication
+from threading import Thread
 from PyQt5 import QtGui
 import sys
 from random import shuffle
@@ -9,7 +10,7 @@ from layout_test import*
 from layout_menu import*
 from questions import questions, correct, wrong
 
-import os
+import os, time
 clear = lambda: os.system('cls')
 
 # налаштування вікон
@@ -45,6 +46,7 @@ shuffle(questions)
 question_number = 0
 questions[question_number].show(lb_question, rbuttons, question_number)
 
+
 # функції для кнопок
 clear()
 def setNoChecked():
@@ -61,9 +63,9 @@ def Answer():
     window_answer.show()
 
 def Menu():
+    window_menu.show()
     window.hide()
     window_answer.hide()
-    window_menu.show()
 
 def Next():
     global question_number, correct, wrong
@@ -85,16 +87,42 @@ def Next():
         wrong = 0
 
 def Start_Return():
+    global TimerWork
     window_menu.hide()
-    window.show()
+    window.show()  
 
+def Exit():
+    global TimerWork
+    TimerWork = False
+    sys.exit()
+
+
+# секундомер
+sec = 0
+TimerWork =True
+
+def timer():
+    global sec, clear, TimerWork
+    while TimerWork:
+        lb_timer.setText(f'Таймер: {sec}')
+        time.sleep(1)
+        clear()
+        sec += 1
+    
+        if not(window.isVisible()) and not(window_answer.isVisible()) and not(window_menu.isVisible()):
+            TimerWork = False
+            sys.exit()
+
+th = Thread(target=timer)
+th.start()
 
 # підключення функцій до кнопок
 btn_start.clicked.connect(Start_Return)
 btn_answer.clicked.connect(Answer)
 btn_next.clicked.connect(Next)
 btn_menu.clicked.connect(Menu)
-btn_exit.clicked.connect(lambda:sys.exit())
+btn_exit.clicked.connect(Exit)
+
 
 # запуск додатку
 app.exec_()
